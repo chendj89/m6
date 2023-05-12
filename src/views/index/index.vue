@@ -10,6 +10,7 @@ import loadVirtual from '@/virtual'
 import uDropdown from '@/unity/uDropdown'
 import { encrypt, decrypt } from '@/utils/encryption'
 import { useRouter } from 'vue-router'
+import type { userInfo } from "@/types/users";
 
 const router = useRouter()
 
@@ -24,7 +25,7 @@ const addRoute = () => {
   router.push(name)
 }
 
-const options = [
+const options:UserInfo[] = [
   {
     label: '用户名',
     key: 'username'

@@ -8,6 +8,7 @@ import {
   nextTick,
 } from "vue";
 import { NAvatar, NDropdown, NText } from "naive-ui";
+import type { userInfo } from "@/types/users";
 function renderCustomHeader() {
   return h(
     "div",
@@ -69,7 +70,7 @@ export default defineComponent({
     const x: Ref<number> = ref(0);
     const y: Ref<number> = ref(0);
     const show: Ref<boolean> = ref(false);
-    let defaultOptions = [
+    let defaultOptions:userInfo[] = [
       {
         key: "header",
         type: "render",
