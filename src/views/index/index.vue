@@ -3,6 +3,9 @@
     <uDropdown v-model="options" size="small">
       <n-button type="primary">添加路由</n-button>
     </uDropdown>
+    <div style="margin-top:50px">
+      <acx></acx>
+    </div>
   </div>
 </template>
 <script lang="ts" setup name="Index">
@@ -11,6 +14,9 @@ import uDropdown from '@/unity/uDropdown'
 import { encrypt, decrypt } from '@/utils/encryption'
 import { useRouter } from 'vue-router'
 import type { userInfo } from "@/types/users";
+
+import acx from './a.tsx';
+
 
 const router = useRouter()
 
