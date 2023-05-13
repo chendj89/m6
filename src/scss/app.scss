@@ -21,3 +21,10 @@ td .n-button + .n-button {
   display: flex;
   align-items: center;
 }
+
+.height100 {
+  height: 100%;
+}
+.blur {
+  backdrop-filter: blur(4px);
+}

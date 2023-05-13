@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides" :theme="theme">
+  <n-config-provider :theme-overrides="themeOverrides" :theme="theme" class="height100">
     <LoginComponent />
   </n-config-provider>
 </template>
