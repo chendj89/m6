@@ -7,6 +7,9 @@ $transitionTime: 0.3s ease;
 $logoHeight: 48px;
 $tabHeight: 40px;
 $footerHeight: 0px;
+// 宽长比例13/16
+$ar: 0.8125;
 :export {
   theme: $theme;
+  ar: $ar;
 }
