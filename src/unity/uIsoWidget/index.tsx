@@ -13,7 +13,7 @@ export default defineComponent({
     },
     width: {
       type: Number,
-      default: 240
+      default: 280
     },
     padding: {
       type: Number,
@@ -37,7 +37,7 @@ export default defineComponent({
     },
     cols: {
       type: Number,
-      default: 5
+      default: 6
     }
   },
   setup() {

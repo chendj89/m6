@@ -34,6 +34,15 @@ fetch(
   .then((result: any) => {
     data.value.children = result.data.list.slice(0, 10)
   })
+
+const url = "https://api.github.com/repos/vuejs/core/releases?per_page=1";
+fetch(url)
+  .then(response => response.text())
+  .then(html => {
+    // 处理 HTML 内容
+    console.log(html)
+  });
+
 </script>
 
 <style lang="scss" scoped>
