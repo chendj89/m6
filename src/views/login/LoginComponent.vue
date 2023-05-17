@@ -9,6 +9,55 @@
     "
   >
     <UIosWidge></UIosWidge>
+    <div class="uMusic">
+      <div class="uMusic-title">
+        <div>云音乐国电榜</div>
+      </div>
+      <div class="uMusic-body">
+        <div class="uMusic-item">
+          <a href="http://" target="_blank">
+            <img
+              class="uMusic-item-icon"
+              src="https://avatars.githubusercontent.com/u/105529957"
+              alt=""
+            />
+          </a>
+          <div class="uMusic-item-content">
+            <div class="uMusic-item-name">Please Stay With Me</div>
+            <div class="uMusic-item-desc">Martin Carlos</div>
+          </div>
+          <div class="uMusic-item-bagde">热门</div>
+        </div>
+        <div class="uMusic-item">
+          <a href="http://" target="_blank">
+            <img
+              class="uMusic-item-icon"
+              src="https://avatars.githubusercontent.com/u/105529957"
+              alt=""
+            />
+          </a>
+          <div class="uMusic-item-content">
+            <div class="uMusic-item-name">Please Stay With Me</div>
+            <div class="uMusic-item-desc">Martin Carlos</div>
+          </div>
+          <div class="uMusic-item-bagde">热门</div>
+        </div>
+        <div class="uMusic-item">
+          <a href="http://" target="_blank">
+            <img
+              class="uMusic-item-icon"
+              src="https://avatars.githubusercontent.com/u/105529957"
+              alt=""
+            />
+          </a>
+          <div class="uMusic-item-content">
+            <div class="uMusic-item-name">Please Stay With Me</div>
+            <div class="uMusic-item-desc">Martin Carlos</div>
+          </div>
+          <div class="uMusic-item-bagde">热门</div>
+        </div>
+      </div>
+    </div>
     <div class="uGridWidget">
       <div
         class="uGridWidget-icon"
@@ -117,7 +166,7 @@ fetch(url)
   }
 }
 .uAli {
-  --width: 240px;
+  --width: 280px;
   --gap: 10px;
   --radius: 8px;
   --bg: linear-gradient(45deg, #3595e1, #1677ff);
@@ -159,6 +208,47 @@ fetch(url)
       display: block;
       width: 100%;
       height: 100%;
+    }
+  }
+}
+.uMusic {
+  background: #fff;
+  box-shadow: 0 0 6px 1px rgba(180, 180, 180, 0.2);
+  width: 280px;
+  border-radius: 8px;
+  &-title {
+    display: flex;
+    padding:8px 10px;
+    font-weight: bold;
+  }
+  &-body {
+    padding-bottom: 10px;
+  }
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    &-icon {
+      display: block;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+    &-content {
+      flex: 1;
+      padding: 0 10px;
+    }
+    &-bagde {
+      font-size: 12px;
+      color: #ff5c00;
+    }
+    &-name {
+      font-size: 14px;
+    }
+    &-desc {
+      font-size: 14px;
+      color: #999;
     }
   }
 }
