@@ -1,41 +1,53 @@
-import { createVNode, render, defineComponent, ref } from "vue";
-import { NModal, NConfigProvider, zhCN, dateZhCN } from "naive-ui";
+import { createVNode, render, defineComponent, ref } from 'vue'
+import { NModal, NConfigProvider, zhCN, dateZhCN } from 'naive-ui'
+import { drag, unDrag } from '@/hooks/useDialogDragger'
 const tpl = defineComponent({
-  props: ["com", "opts"],
+  props: ['com', 'opts'],
   setup() {
-    const show = ref(false);
-    const loaded = ref(false);
+    const show = ref(false)
+    const loaded = ref(false)
     // 显示
     setTimeout(() => {
-      show.value = true;
-    }, 300);
+      show.value = true
+    }, 300)
     // 加载子组件
     setTimeout(() => {
-      loaded.value = true;
-    }, 320);
+      loaded.value = true
+    }, 320)
+    const header: any = ref()
+    onMounted(() => {
+      console.log(header.value)
+      // drag(header.value)
+    })
+    setTimeout(() => {
+      drag(header.value)
+    }, 1000)
+
     return {
       show,
       loaded,
-    };
+      header
+    }
   },
   render() {
     const onClose: any = (args: any) => {
-      this.show = false;
+      this.show = false
+      unDrag(this.header);
       setTimeout(() => {
         // @ts-ignore
-        this.$.appContext?.$close(args);
-      }, 300);
-    };
+        this.$.appContext?.$close(args)
+      }, 300)
+    }
     const onSuccess = (args: any) => {
-      onClose({ ...args, type: "success" });
-    };
+      onClose({ ...args, type: 'success' })
+    }
     const onCancel = (args: any) => {
       if (args) {
-        args.type + "cancel";
+        args.type + 'cancel'
       }
-      onClose({ ...args, type: "cancel" });
-    };
-    const { title, ...rest } = this.$props.opts;
+      onClose({ ...args, type: 'cancel' })
+    }
+    const { title, ...rest } = this.$props.opts
     return (
       <NConfigProvider locale={zhCN} date-locale={dateZhCN}>
         <NModal
@@ -44,7 +56,7 @@ const tpl = defineComponent({
           preset="dialog"
           title="Dialog"
           maskClosable={false}
-          style="--n-padding:16px;--n-close-margin:16px 16px 0 0;margin-top:200px"
+          style="--n-padding:16px;--n-close-margin:16px 16px 0 0;"
           show-icon={false}
         >
           {{
@@ -55,29 +67,31 @@ const tpl = defineComponent({
                     onSuccess,
                     onCancel,
                     onClose,
-                    ...rest,
+                    ...rest
                   })
                 : null,
-            header: () => title,
+            header: h('div', {
+              ref:'header'
+            }, title)
           }}
         </NModal>
       </NConfigProvider>
-    );
-  },
-});
+    )
+  }
+})
 
 export interface Opts {
   /**
    * 弹窗标题
    */
-  title: String;
+  title: String
   /**
    * 参数
    */
-  params: Record<string, any>;
+  params: Record<string, any>
 }
 export default function useDialog2() {
-  const ins: any = inject("ins");
+  const ins: any = inject('ins')
   /**
    * 使用弹窗
    * @example
@@ -108,20 +122,20 @@ export default function useDialog2() {
    *   </script>
    * ```
    */
-  return (com: any, opts: Opts) => {
+  return ({ com, opts }: { com: any; opts: Opts }) => {
     return new Promise((resolve) => {
-      let container = document.createElement("div");
+      let container = document.createElement('div')
       const app: any = createVNode(tpl, {
         com: com,
-        opts,
-      });
-      app.appContext = ins.appContext.app._context;
+        opts
+      })
+      app.appContext = ins.appContext.app._context
       app.appContext.$close = (result: any = true) => {
-        render(null, container);
-        container.parentNode?.removeChild(container);
-        resolve(result);
-      };
-      render(app, container);
-    });
-  };
+        render(null, container)
+        container.parentNode?.removeChild(container)
+        resolve(result)
+      }
+      render(app, container)
+    })
+  }
 }

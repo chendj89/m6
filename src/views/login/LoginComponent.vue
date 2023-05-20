@@ -6,6 +6,7 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: flex-start;
+      background: #e5ecef;
     "
   >
     <UIosWidge></UIosWidge>
@@ -112,6 +113,47 @@
         </a>
       </div>
     </div>
+    <div class="job-card">
+      <div class="job-card-header">
+        <svg
+          viewBox="0 -13 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+          style="background-color: #2e2882"
+        >
+          <g fill="#feb0a5">
+            <path
+              d="M256 92.5l127.7 91.6L512 92 383.7 0 256 91.5 128.3 0 0 92l128.3 92zm0 0M256 275.9l-127.7-91.5L0 276.4l128.3 92L256 277l127.7 91.5 128.3-92-128.3-92zm0 0"
+            ></path>
+            <path d="M127.7 394.1l128.4 92 128.3-92-128.3-92zm0 0"></path>
+          </g>
+          <path
+            d="M512 92L383.7 0 256 91.5v1l127.7 91.6zm0 0M512 276.4l-128.3-92L256 275.9v1l127.7 91.5zm0 0M256 486.1l128.4-92-128.3-92zm0 0"
+            fill="#feb0a5"
+          ></path>
+        </svg>
+        <div class="menu-dot"></div>
+      </div>
+      <div class="job-card-title">UI / UX Designer</div>
+      <div class="job-card-subtitle">
+        The User Experience Designer position exists to create compelling and
+        digital user experience through excellent design...
+      </div>
+      <div class="job-detail-buttons">
+        <button class="search-buttons detail-button">Full Time</button>
+        <button class="search-buttons detail-button">Min. 1 Year</button>
+        <button class="search-buttons detail-button">Senior Level</button>
+      </div>
+      <div class="job-card-buttons">
+        <button class="search-buttons card-buttons">Apply Now</button>
+        <button class="search-buttons card-buttons-msg">Messages</button>
+      </div>
+    </div>
+    <div class="oDialog">
+      <div id="header" class="oDialog-header">标题</div>
+      <div class="oDialog-content">
+
+      </div>
+    </div>
   </div>
 </template>
 
@@ -135,13 +177,44 @@ fetch(url)
     // 处理 HTML 内容
     console.log(html)
   })
+
+import useDialog2 from '@/plugins/useDialog2'
+// import Aa from './aa.vue'
+// const dialog2 = useDialog2()
+// dialog2({
+//   com: Aa,
+//   opts: {
+//     title: '00',
+//     params: {}
+//   }
+// })
+import {drag,unDrag} from "@/hooks/useDialogDragger"
+onMounted(()=>{
+  drag(document.getElementById("header") as HTMLElement)
+})
 </script>
 
 <style lang="scss" scoped>
+.oDialog {
+  position: fixed;
+  left: 0;
+  top:0;
+  width: 320px;
+  height: 300px;
+  background-color: #ff5c00;
+  &-header {
+    height: 36px;
+    background-color: #ff5c00;
+    cursor: move;
+  }
+}
+
+
 .uGridWidget {
-  --width: 240px;
+  --width: 280px;
   --gap: 10px;
   --radius: 8px;
+  --count: 5;
   display: flex;
   padding: var(--gap);
   flex-wrap: wrap;
@@ -155,8 +228,9 @@ fetch(url)
     background: rgba(#000, 0.5);
   }
   &-icon {
-    width: calc(var(--width) / 5 - var(--gap) * 6 / 5);
-    height: calc(var(--width) / 5 - var(--gap) * 6 / 5);
+    // width: calc(var(--width) / 7 - var(--gap) * 7 / 7);
+    width: 35px;
+    height: 35px;
     img {
       display: block;
       width: 100%;
@@ -218,7 +292,7 @@ fetch(url)
   border-radius: 8px;
   &-title {
     display: flex;
-    padding:8px 10px;
+    padding: 8px 10px;
     font-weight: bold;
   }
   &-body {
@@ -251,5 +325,77 @@ fetch(url)
       color: #999;
     }
   }
+}
+.menu-dot {
+  background-color: var(--placeholder-color);
+  box-shadow: -6px 0 0 0 var(--placeholder-color),
+    6px 0 0 0 var(--placeholder-color);
+  width: 4px;
+  height: 4px;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: 8px;
+}
+.job-card {
+  width: 320px;
+  height: 280px;
+  padding: 20px 16px;
+  background-color: var(--header-bg-color);
+  background: #e91e63;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    transform: scale(1.02);
+  }
+  svg {
+    width: 46px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  &-title {
+    font-weight: 600;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  &-subtitle {
+    color: var(--subtitle-color);
+    font-size: 13px;
+    margin-top: 14px;
+    line-height: 1.6em;
+  }
+  &-header {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+.job-card-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4px;
+}
+.search-buttons {
+  --active-color: #0162ff;
+  --button-color: #fff;
+  border: none;
+  color: var(--button-color);
+  background-color: var(--active-color);
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 14px;
+}
+.detail-button {
+  background-color: var(--active-light-color);
+  color: var(--active-color);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 8px;
+  border-radius: 4px;
 }
 </style>
