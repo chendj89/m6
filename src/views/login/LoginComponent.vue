@@ -148,10 +148,13 @@
         <button class="search-buttons card-buttons-msg">Messages</button>
       </div>
     </div>
-    <div class="oDialog">
+    <div
+      class="oDialog"
+      :style="{ width: box.width + 'px', height: box.height + 'px' }"
+    >
       <div id="header" class="oDialog-header">标题</div>
       <div class="oDialog-content">
-
+        <div class="oDialog-resize"></div>
       </div>
     </div>
   </div>
@@ -188,27 +191,83 @@ import useDialog2 from '@/plugins/useDialog2'
 //     params: {}
 //   }
 // })
-import {drag,unDrag} from "@/hooks/useDialogDragger"
-onMounted(()=>{
-  drag(document.getElementById("header") as HTMLElement)
+import { drag, unDrag } from '@/hooks/useDialogDragger'
+onMounted(() => {
+  drag(document.getElementById('header') as HTMLElement)
 })
+
+const isResizing = ref(false)
+const startX = ref(0)
+const startY = ref(0)
+const startWidth = ref(0)
+const startHeight = ref(0)
+const box = ref({
+  width: 320,
+  height: 300
+})
+const startResize = (event: MouseEvent) => {
+  isResizing.value = true
+  startX.value = event.pageX
+  startY.value = event.pageY
+  startWidth.value = box.value.width
+  startHeight.value = box.value.width
+  window.addEventListener('mousemove', resize)
+  window.addEventListener('mouseup', stopResize)
+}
+
+const resize = (event: MouseEvent) => {
+  if (isResizing.value) {
+    const width = startWidth.value + (event.pageX - startX.value)
+    const height = startHeight.value + (event.pageY - startY.value)
+    box.value.width = width
+    box.value.height = height
+  }
+}
+
+const stopResize = () => {
+  isResizing.value = false
+  window.removeEventListener('mousemove', resize)
+  window.removeEventListener('mouseup', stopResize)
+}
 </script>
 
 <style lang="scss" scoped>
 .oDialog {
   position: fixed;
   left: 0;
-  top:0;
+  top: 0;
   width: 320px;
   height: 300px;
   background-color: #ff5c00;
+  resize: both;
+  overflow: auto;
+  min-width: 200px;
+  min-height: 300px;
+  // max-width: 600px;
+  // max-height: 360px;
+  aspect-ratio: 1/1;
+  &::-webkit-resizer {
+    background-image: url('@/assets/svgs/shop.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+  }
   &-header {
     height: 36px;
     background-color: #ff5c00;
     cursor: move;
   }
+  &-resize {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+  }
 }
-
 
 .uGridWidget {
   --width: 280px;
