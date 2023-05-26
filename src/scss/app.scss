@@ -1,5 +1,11 @@
 :root {
   --menu-width: 210px;
+  --n-close-size: 22px;
+  // --n-close-icon-color-hover: rgba(102, 102, 102, 1);
+  --n-close-color-hover: rgba(0, 0, 0, .09);
+  --n-close-border-radius: 3px;
+  --n-bezier: cubic-bezier(.4, 0, .2, 1);
+  --n-close-icon-size: 18px;
 }
 html,
 body,
@@ -17,7 +23,48 @@ td .n-button + .n-button {
 .n-card {
   border-radius: 10px;
 }
-.flex.items-center{
+.flex.items-center {
   display: flex;
   align-items: center;
+}
+
+.ubox {
+  --color-border: rgba(0,0,0,0.08);
+  --min-width:200px;
+  position: fixed;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 0 1px hsla(0, 9.1%, 59%, 0.05), 0 4px 10px rgba(0, 0, 0, 0.1);
+  &-content {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    min-width: var(--min-width);
+    min-height: 200px;
+    resize: both;
+    overflow: hidden;
+    &::-webkit-resizer {
+      display: none;
+    }
+  }
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px 0 8px;
+    height: 40px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  &-body {
+   flex:1
+  }
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

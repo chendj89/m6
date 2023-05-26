@@ -20,7 +20,11 @@ import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 export default defineConfig({
   base: process.env.NODE_ENV == 'development' ? '/' : '/m6/',
   plugins: [
-    vue(),
+    vue({
+      script: {
+        propsDestructure: true
+      }
+    }),
     vueSetupExtend(),
     // svg图标
     Icons({ autoInstall: true }),

@@ -9,7 +9,7 @@ const listeners: { name: string; listener: (e: MouseEvent) => void }[] = []
 
 export function drag(wrap: HTMLElement) {
   wrap.style.cursor = 'move'
-  const parent = wrap.parentElement
+  const parent = wrap.parentElement?.parentElement
   if (!parent) {
     return
   }
@@ -19,10 +19,10 @@ export function drag(wrap: HTMLElement) {
   wrap.addEventListener('mousedown', (e: MouseEvent) => {
     e.preventDefault()
     status = 'down'
-    range.left = -((document.documentElement.clientWidth - parent.clientWidth) / 2)
-    range.right = Math.abs(range.left)
-    range.top = -(document.documentElement.clientHeight - parent.clientHeight) / 2
-    range.bottom = Math.abs(range.top)
+    range.left = 0
+    range.right = document.documentElement.clientWidth - parent.clientWidth
+    range.top = 0
+    range.bottom = document.documentElement.clientHeight - parent.clientHeight
     startX = e.clientX - (parseInt(parent.style.left) || 0)
     startY = e.clientY - (parseInt(parent.style.top) || 0)
     const handleMove = (e: MouseEvent) => {
